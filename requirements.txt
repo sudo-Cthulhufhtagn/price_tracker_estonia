@@ -1,6 +1,7 @@
 beautifulsoup4==4.11.1
+cchardet==2.1.7
 chromedriver_autoinstaller==0.4.0
+lxml==4.9.1
 pandas==1.5.2
-PyVirtualDisplay==3.0
 selenium==4.7.2
 webdriver_manager==3.8.5

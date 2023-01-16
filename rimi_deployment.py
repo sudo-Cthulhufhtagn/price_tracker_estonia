@@ -8,12 +8,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import json
-import time
+import time, lxml, cchardet
 
 print('starting')
-from pyvirtualdisplay import Display
-display = Display(visible=0, size=(800, 800))  
-display.start()
+# from pyvirtualdisplay import Display
+# display = Display(visible=0, size=(800, 800))  
+# display.start()
 print('init display')
 
 chromedriver_autoinstaller.install()
@@ -24,7 +24,7 @@ def get_driver():
     chrome_options = Options()
     #  chrome_options.headless = True
     #  chrome_options.add_argument('--headless')
-    #  chrome_options.add_argument('--window-size=1920,1080')
+    chrome_options.add_argument('--window-size=800,800')
     #  chrome_options.add_argument('--no-sandbox')
     #  chrome_options.add_argument('--disable-dev-shm-usage')
     #  chrome_options.add_argument("--disable-setuid-sandbox")
@@ -38,7 +38,7 @@ def get_driver():
     return driver
 
 def parse_products(driver, product_list: list):
-    soup = BeautifulSoup(driver.page_source, 'html.parser')     # lxml parser instal
+    soup = BeautifulSoup(driver.page_source, 'lxml')     # lxml parser instal
     items = soup.findAll("ul", {"class": "product-grid"})[0].findAll('li')
     for item in items:
         # infos_row = i.findAll('div')[0]  # get the info of a single row
@@ -63,7 +63,7 @@ try:
 finally:        
     print('loaded')
 
-soup = BeautifulSoup(driver.page_source, 'html.parser')     # lxml parser install
+soup = BeautifulSoup(driver.page_source, 'lxml')     # lxml parser install
 products_links = []
 for menu in soup.find_all('ul', {"id" : lambda L: L and L.startswith('desktop_category_menu_')}):
     products_links.append(menu.find('a')['href'])
