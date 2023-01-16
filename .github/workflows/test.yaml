@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: test
+      run: echo "Unit test"
+
     - name: checkout repo content
       uses: actions/checkout@v3
 
