@@ -11,9 +11,9 @@ import json
 import time, lxml, cchardet
 
 print('starting')
-# from pyvirtualdisplay import Display
-# display = Display(visible=0, size=(800, 800))  
-# display.start()
+from pyvirtualdisplay import Display
+display = Display(visible=0, size=(800, 800))  
+display.start()
 print('init display')
 
 chromedriver_autoinstaller.install()
