@@ -13,6 +13,11 @@ jobs:
       run: |
         env
 
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+
     - name: test
       run: echo "Unit test"
 
@@ -43,4 +48,4 @@ jobs:
       uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
+        branch: ${{ GITHUB_REF#refs/heads/ }}
