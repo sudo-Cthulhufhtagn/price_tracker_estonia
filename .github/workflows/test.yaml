@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - selver
 
 jobs:
   build:
@@ -35,7 +36,7 @@ jobs:
         pip install -r requirements.txt
         
     - name: execute py scrapper
-      run: python rimi_deployment.py
+      run: python selver_deployment.py
 
     - name: commit files
       run: |
