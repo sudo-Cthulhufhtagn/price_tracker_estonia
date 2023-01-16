@@ -2,7 +2,7 @@ name: my_little_scrappy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
