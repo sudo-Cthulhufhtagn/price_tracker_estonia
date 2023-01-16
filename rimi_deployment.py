@@ -10,9 +10,11 @@ from selenium.webdriver.common.by import By
 import json
 import time
 
+print('starting')
 from pyvirtualdisplay import Display
 display = Display(visible=0, size=(800, 800))  
 display.start()
+print('init display')
 
 chromedriver_autoinstaller.install()
 
@@ -50,7 +52,11 @@ def parse_products(driver, product_list: list):
         product_list.append((description['id'], description['name'], description['price'], per_kilo))
 
 driver = get_driver()
+print('got driver')
+
 driver.get(BASE_LINK+"/epood/en")
+print('got page')
+
 try:        
     # elem = WebDriverWait(driver, 30).until(    EC.presence_of_element_located((By.CLASS_NAME, "product-grid")))
     elem = WebDriverWait(driver, 30).until(    EC.presence_of_element_located((By.ID, "desktop_category_menu_button")))
@@ -90,6 +96,7 @@ for products_link in products_links:
         except:
             break
     print(f'Time per page = {time.time()-time0}')
-    
+    break
+
 print('all-in-all:', time.time()-all_timer_start)
     
