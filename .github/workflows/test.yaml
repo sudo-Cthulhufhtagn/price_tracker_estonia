@@ -1,0 +1,26 @@
+name: my_little_scrappy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout repo content
+              uses: actions/checkout@v3
+
+      - name: setup python
+              uses: actions/setup-python@v3
+              with:
+                python-version: '3.9.15'
+          
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: execute py scrapper
+        run: python rimi_deployment.py
