@@ -8,12 +8,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 import json
-import time, lxml, cchardet
+import time, lxml, cchardet, os
 
 print('starting')
-from pyvirtualdisplay import Display
-display = Display(visible=0, size=(800, 800))  
-display.start()
+if os.getenv('CI'):
+    from pyvirtualdisplay import Display
+    display = Display(visible=0, size=(800, 800))  
+    display.start()
 print('init display')
 
 chromedriver_autoinstaller.install()
@@ -70,7 +71,7 @@ for menu in soup.find_all('ul', {"id" : lambda L: L and L.startswith('desktop_ca
 
 shopping_list = []
 all_timer_start = time.time()
-for products_link in products_links[:2]:
+for products_link in products_links:
     page_counter = 1
     products_link+='?page=1&pageSize=80'
     driver.get(BASE_LINK+products_link)
