@@ -70,7 +70,7 @@ for menu in soup.find_all('ul', {"id" : lambda L: L and L.startswith('desktop_ca
 
 shopping_list = []
 all_timer_start = time.time()
-for products_link in products_links:
+for products_link in products_links[:2]:
     page_counter = 1
     products_link+='?page=1&pageSize=80'
     driver.get(BASE_LINK+products_link)
@@ -96,7 +96,9 @@ for products_link in products_links:
         except:
             break
     print(f'Time per page = {time.time()-time0}')
-    break
 
 print('all-in-all:', time.time()-all_timer_start)
+
+df = pd.DataFrame(shopping_list, columns=['id', 'name', 'price', 'price/kg'])
+df.to_csv('rimi.csv', index=False)
     
