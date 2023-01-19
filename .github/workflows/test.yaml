@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -43,4 +45,4 @@ jobs:
       uses: ad-m/github-push-action@v0.6.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: master
+        branch: rimi_archive
